@@ -4,7 +4,7 @@ export default function GamesFilter({ genres, onFilterChange, publishers }) {
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [publisher, setPublisher] = useState("");
-    
+
     const genreRef = useRef();
     const titleRef = useRef();
     const publisherRef = useRef();
@@ -31,11 +31,9 @@ export default function GamesFilter({ genres, onFilterChange, publishers }) {
         let title = titleRef.current.value;
         let genre = genreRef.current.value;
         let publisher = publisherRef.current.value;
-        onFilterChange(title,genre, publisher);
+        onFilterChange(title, genre, publisher);
 
     }
-
-
 
     function resetFilterControls() {
         setTitle("");
@@ -57,7 +55,7 @@ export default function GamesFilter({ genres, onFilterChange, publishers }) {
         )
     });
 
-    genreOptionJsx.unshift(<option value="all">All Genres</option>)
+    genreOptionJsx.unshift(<option value="">All Genres</option>)
 
     let publisherOptionJsx = publishers.map(publisher => {
         return (
@@ -65,7 +63,7 @@ export default function GamesFilter({ genres, onFilterChange, publishers }) {
         )
     });
 
-    publisherOptionJsx.unshift(<option value="all">All Publishers</option>)
+    publisherOptionJsx.unshift(<option value="">All Publishers</option>)
 
     return (
         <>
@@ -80,14 +78,14 @@ export default function GamesFilter({ genres, onFilterChange, publishers }) {
             </div>
             <div>
                 Filters:
-                <select ref ={genreRef} 
-                onChange={(e) => { handleGenreChange(e) }}
+                <select ref={genreRef}
+                    onChange={(e) => { handleGenreChange(e) }}
                 >
                     {genreOptionJsx}
                 </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <select ref ={publisherRef} 
-                onChange={(e) => { handlePublisherChange(e) }}
+                <select ref={publisherRef}
+                    onChange={(e) => { handlePublisherChange(e) }}
                 >
                     {publisherOptionJsx}
                 </select>

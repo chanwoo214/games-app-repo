@@ -18,7 +18,7 @@ export default function GamesList() {
                 setGames(gamesJsonData);
                 setAllGames(gamesJsonData);
                 setGenres(getUniqueGenresList(gamesJsonData));
-                setPublishers(getUniquePublisherList(gamesJsonData));
+                setPublishers(getUniquePublishersList(gamesJsonData));
             })
             .catch(errorMessage => {
                 setErrorMessage("Sorry, unable to connect to server. Please try again later!");
@@ -31,8 +31,8 @@ export default function GamesList() {
         return uniqueGenresList;
     }
 
-    const getUniquePublisherList = function (games) {
-        const allPublishersList = games.map(game => game.publishers);
+    const getUniquePublishersList = function (games) {
+        const allPublishersList = games.map(game => game.publisher);
         const uniquePublishersList = [...new Set(allPublishersList)];
         return uniquePublishersList;
     }
@@ -94,7 +94,7 @@ export default function GamesList() {
             {!errorMessage &&
                 <GamesFilter
                     genres={genres}
-                    publisher = {publishers}
+                    publishers = {publishers}
                     onFilterChange={applyFilters}
                 >
 
