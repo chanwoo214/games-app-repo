@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-export default function GamesFilter({ genres, onFilterChange }) {
+export default function GamesFilter({ genres, onFilterChange, publishers }) {
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [publisher, setPublisher] = useState("");
@@ -29,8 +29,8 @@ export default function GamesFilter({ genres, onFilterChange }) {
 
     function applyFilters() {
         let title = titleRef.current.value;
-        let genre = genreRef.currnnt.value;
-        let publisher = publisherRef.currnnt.value;
+        let genre = genreRef.current.value;
+        let publisher = publisherRef.current.value;
         onFilterChange(title,genre, publisher);
 
     }
@@ -40,8 +40,10 @@ export default function GamesFilter({ genres, onFilterChange }) {
     function resetFilterControls() {
         setTitle("");
         setGenre("");
+        setPublisher("");
         genreRef.current.value = "";
         titleRef.current.value = "";
+        publisherRef.current.value = "";
     }
 
     function removeFilters() {
@@ -55,15 +57,15 @@ export default function GamesFilter({ genres, onFilterChange }) {
         )
     });
 
-    genreOptionJsx.unshift(<option value="all">All</option>)
+    genreOptionJsx.unshift(<option value="all">All Genres</option>)
 
     let publisherOptionJsx = publishers.map(publisher => {
         return (
-            <option value={genre}>{genre}</option>
+            <option value={publisher}>{publisher}</option>
         )
     });
 
-    publisherOptionJsx.unshift(<option value="all">All</option>)
+    publisherOptionJsx.unshift(<option value="all">All Publishers</option>)
 
     return (
         <>
@@ -79,12 +81,14 @@ export default function GamesFilter({ genres, onFilterChange }) {
             <div>
                 Filters:
                 <select ref ={genreRef} 
-                onChange={(e) => { handleGenreChange(e) }}>
+                onChange={(e) => { handleGenreChange(e) }}
+                >
                     {genreOptionJsx}
-                </select>
+                </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                 <select ref ={publisherRef} 
-                onChange={(e) => { handlePublisherChange(e) }}>
+                onChange={(e) => { handlePublisherChange(e) }}
+                >
                     {publisherOptionJsx}
                 </select>
             </div>

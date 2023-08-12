@@ -18,6 +18,7 @@ export default function GamesList() {
                 setGames(gamesJsonData);
                 setAllGames(gamesJsonData);
                 setGenres(getUniqueGenresList(gamesJsonData));
+                setPublishers(getUniquePublisherList(gamesJsonData));
             })
             .catch(errorMessage => {
                 setErrorMessage("Sorry, unable to connect to server. Please try again later!");
@@ -37,17 +38,12 @@ export default function GamesList() {
     }
 
     const applyFilters = function (title, genre, publisher) {
-        let filteredGames = allGames.filter(game => 
-            (gamgame.title.toLowerCase().includes(title.toLowerCase()) &&
-            (genre.includes("") || game.genre.includes(genre))
-        ))
-        console.log(filteredGames)
-        setGames(filteredGames)
-    }
-  
-
-    const filterGamesByGenre = function (genre) {
-        let filteredGames = allGames.filter(game => game.genre === genre);
+        let filteredGames = allGames.filter(game =>
+            (title == "" || game.title.toLowerCase().includes(title.toLowerCase())) &&
+            (genre == "" || game.genre.includes(genre)) &&
+            (publisher == "" || game.publisher.includes(publisher))
+        );
+        console.log(filteredGames);
         setGames(filteredGames);
     }
 
@@ -98,6 +94,7 @@ export default function GamesList() {
             {!errorMessage &&
                 <GamesFilter
                     genres={genres}
+                    publisher = {publishers}
                     onFilterChange={applyFilters}
                 >
 
